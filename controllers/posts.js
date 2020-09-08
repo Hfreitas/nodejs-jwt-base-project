@@ -1,22 +1,6 @@
-const mockPosts = [
-  {
-    title: 'título fake',
-    content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
-  },
-  {
-    title: 'título fake',
-    content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
-  },
-  {
-    title: 'título fake',
-    content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
-  },
-  {
-    title: 'título fake',
-    content: 'conteúdo conteúdo conteúdo conteúdo conteúdo',
-  },
-];
+const mockPosts = require('../models/posts');
 
-module.exports = (req, res, next) => {
+// eslint-disable-next-line no-unused-vars
+module.exports = (req, res, _next) => {
   res.status(200).json({ mockPosts });
 };

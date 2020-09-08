@@ -5,6 +5,7 @@ const { SECRET_TOKEN } = process.env;
 
 module.exports = async (req, res, next) => {
   const { authorization: token } = req.headers;
+  const { method } = req;
 
   if (!token) {
     return res.status(400).json({ error: 'Token não encontrado ou informado' });
@@ -17,7 +18,13 @@ module.exports = async (req, res, next) => {
     const user = await model.findOne({ _id });
 
     if (!user) {
-      res.status(401).json({ message: 'Erro ao procurar usuario do token.' });
+      return res
+        .status(401)
+        .json({ message: 'Erro ao procurar usuario do token.' });
+    }
+
+    if (method === 'POST' && user.access !== 'admin') {
+      return res.status(401).json({ message: 'Não autorizado.' });
     }
 
     req.user = user;

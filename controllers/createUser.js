@@ -1,8 +1,7 @@
 const Model = require('../models/user');
 
 module.exports = (req, res) => {
-  const { username } = req.body;
-  const { password } = req.body;
+  const { username, password } = req.body;
 
   const data = new Model({
     username,

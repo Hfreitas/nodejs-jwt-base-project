@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
   if (!user) res.status(401).json(false);
 
   const jwtConfig = {
-    expiresIn: '30m',
+    expiresIn: '10m',
     algorithm: 'HS256',
   };
 

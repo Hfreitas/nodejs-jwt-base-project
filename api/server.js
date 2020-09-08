@@ -12,6 +12,7 @@ const { PORT = 4000 } = process.env;
 
 const apiRoutes = express.Router();
 apiRoutes.get('/api/posts', auth, routes.getPosts);
+apiRoutes.post('/api/posts', auth);
 apiRoutes.post('/api/users', routes.createUsers);
 apiRoutes.post('/api/login', routes.login);
 
