@@ -2,12 +2,27 @@
   "name": "api-jwt",
   "version": "1.0.0",
   "main": "api/server.js",
+  "license": "MIT",
+  "scripts": {
+    "debug": "nodemon index.js"
+  },
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "jwt-simple": "^0.5.6",
     "moment": "^2.24.0",
-    "mongoose": "^5.9.2"
+    "mongoose": "^5.10.3"
+  },
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.1"
   }
 }

@@ -1,24 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+require('dotenv').config();
 const routes = require('./routes');
-
-const db = ''; //coloque sua URL do MongoDB aqui
-const port = process.env.PORT || 8080;
-
-mongoose.connect(db, { useNewUrlParser: true });
+const auth = require('./auth');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+const { PORT = 4000 } = process.env;
 
 const apiRoutes = express.Router();
-apiRoutes.get('/api/posts', routes.getPosts);
+apiRoutes.get('/api/posts', auth, routes.getPosts);
 apiRoutes.post('/api/users', routes.createUsers);
 apiRoutes.post('/api/login', routes.login);
 
 app.use(apiRoutes);
 
-app.listen(port);
-console.log('conectado na porta ' + port);
+app.listen(PORT, () => console.log(`Listen on PORT ${PORT}`));

@@ -1,8 +1,11 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
+const { SECRET_TOKEN } = process.env;
+
 module.exports = async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  const { username } = req.body;
+  const { password } = req.body;
 
   if (!username || !password) return res.send(401);
 
@@ -10,5 +13,12 @@ module.exports = async (req, res) => {
 
   if (!user) res.status(401).json(false);
 
-  res.status(200).json(true);
+  const jwtConfig = {
+    expiresIn: '30m',
+    algorithm: 'HSH256',
+  };
+
+  const token = jwt.sign({ data: user }, SECRET_TOKEN, jwtConfig);
+
+  return res.status(200).json({ token });
 };
