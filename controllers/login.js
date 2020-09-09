@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
@@ -11,7 +12,9 @@ module.exports = async (req, res) => {
 
   const user = await User.findOne({ username });
 
-  if (!user) res.status(401).json(false);
+  const comparePassword = await bcrypt.compare(password, user.password);
+
+  if (!user || !comparePassword) res.status(401).json(false);
 
   const jwtConfig = {
     expiresIn: '10m',

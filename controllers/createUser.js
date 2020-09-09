@@ -1,11 +1,16 @@
+const bcrypt = require('bcrypt');
 const Model = require('../models/user');
 
-module.exports = (req, res) => {
+const saltRounds = 10;
+
+module.exports = async (req, res) => {
   const { username, password } = req.body;
+
+  const encryptedPassWord = await bcrypt.hash(password, saltRounds);
 
   const data = new Model({
     username,
-    password,
+    password: encryptedPassWord,
   });
 
   data
